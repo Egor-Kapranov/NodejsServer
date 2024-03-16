@@ -1,0 +1,279 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "CafeMigom",
+    "description": "The best",
+    "contact": {
+      "name": "Egorka"
+    },
+    "server": ["http://localhost:5001"],
+    "version": "1.0.0"
+  },
+  "host": "localhost:5001",
+  "basePath": "/api",
+  "schemes": ["http"],
+  "paths": {
+    "/user/registration": {
+      "post": {
+        "description": "Регистрация нового пользователя по имени, телефону, паспорту и роли",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "example": "aniki"
+                },
+                "telephone": {
+                  "example": "298133244"
+                },
+                "password": {
+                  "example": "1shakryt"
+                },
+                "role": {
+                  "example": "1"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/user/auth": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/user/login": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/review/add": {
+      "post": {
+        "description": "Добавление нового отзыва ресторана ",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/review/{restaurantId}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "restaurantId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/review/com/{userId}": {
+      "get": {
+        "description": "Получения имени пользователя по его id в таблице reviews",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/restaurant/add": {
+      "post": {
+        "description": "Добавление нового ресторана с названием, описанием и картинкой",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "ИтальяноПрерано"
+                },
+                "description": {
+                  "example": "ИтальяноПрерано - уютный итальянский ресторан с аутентичной кухней и атмосферой."
+                },
+                "image": {
+                  "example": "https://postimg.cc/FkQ4kfVd"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/restaurant/getAll": {
+      "get": {
+        "description": "Получение полного списка ресторанов",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/restaurant/{restaurantId}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "restaurantId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/table/set": {
+      "post": {
+        "description": "Добавление нового столика в ресторан",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/reservation/add": {
+      "post": {
+        "description": "Добваление новой резервации столика",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "reserv_datetime": {
+                  "example": "2023-10-02T11:18"
+                },
+                "restaurant_id": {
+                  "example": "1"
+                },
+                "user_id": {
+                  "example": "1"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}
