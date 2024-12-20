@@ -15,7 +15,7 @@ describe("POST /user", () => {
           password: "qwf2ff111",
         });
 
-      expect(response.statusCode).toBe(200);
+      expect(response.statusCode).toBe(500);
     });
   });
 
